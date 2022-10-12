@@ -73,7 +73,6 @@ The user should be able to see the list of tasks, add new ones, delete existing 
 
     <script>
       let ul = document.getElementById("myTaskList");
-      let arrayOfTasks = document.getElementsByTagName("li");
       let tasks = document.getElementsByTagName("li");
 
       /* EXERCISE 5:
@@ -86,8 +85,9 @@ The user should be able to see the list of tasks, add new ones, delete existing 
       let addNewTask = function () {
         let content = document.getElementById("newTask").value;
         let li = document.createElement("li");
-        li.classList.add("task-list", "task-list-item");
-        li.addEventListener("click", deleteSpecificTask);
+        li.addEventListener("click", (event) => {
+          li.remove();
+        });
         li.innerText = content;
         ul.appendChild(li);
       };
@@ -114,7 +114,12 @@ The user should be able to see the list of tasks, add new ones, delete existing 
                   */
 
       const getTasksAsArray = function () {
-        console.log("Array of Tasks: ", tasks);
+        let array = [];
+        for (let task of tasks) {
+          let content = task.innerText;
+          array.push(content);
+        }
+        console.log(array);
       };
 
       /* EXERCISE 9:
@@ -139,9 +144,11 @@ The user should be able to see the list of tasks, add new ones, delete existing 
                       Attach an eventListener to each new task you create. When the task receives the click it should be removed (only the clicked task should disappear)
             */
 
-      let deleteSpecificTask = function () {
-        ul.removeChild(tasks[0]);
-      };
+      // let deleteSpecificTask = function () {
+      //   for (let task of tasks) {
+      //     console.log(task);
+      //   }
+      // };
       /* EXERCISE 11:
                      Create a function "bubbleSort()" which sorts the task list alphabetically using the bubble sort algorithm
             */
